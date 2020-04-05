@@ -109,7 +109,7 @@ public class Test2 {
                         //where
                         FromItem fromitem = plain.getFromItem();
                         List<SelectItem> selectitem = plain.getSelectItems();
-                        
+                        //getFromItem(fromitem, join);
                         List<String[]> printRes = printselect(selectitem);
 
                         //resultCalc(xpress, str);
@@ -127,7 +127,36 @@ public class Test2 {
                         getFromItem(fromitem, join);
                         tableData = readFullCSV(csvPath/* +"\\"+ ((Table) fromitem).getName() + ".dat"*/);
                     }
-                    
+                    if (body instanceof Union){
+                        Union union = (Union) body;
+                        if(body instanceof plainSelect){
+                            
+                        }
+                        Distinct distinct = union.getPlainSelects();
+                        List<Join> join = union.();
+                        
+                        //where
+                        FromItem fromitem = union.getFromItem();
+                        List<SelectItem> selectitem = union.getSelectItems();
+                        //getFromItem(fromitem, join);
+                        List<String[]> printRes = printselect(selectitem);
+
+                        //resultCalc(xpress, str);
+                        for (String[] string : printRes) {
+                            for (String st : string) {
+                                System.out.print(st + "|");
+                            }
+                            System.out.println("");
+                        }
+                        Expression where = union.getWhere();
+                        if (where != null) {
+                            tableData = getWhereCond(where);
+                        }
+                        
+                        getFromItem(fromitem, join);
+                        tableData = readFullCSV(csvPath/* +"\\"+ ((Table) fromitem).getName() + ".dat"*/);
+                        
+                    }
                 } else if (stmt instanceof CreateTable) {
                     CreateTable createTable = (CreateTable) stmt;
                     /*int z=0;
@@ -208,6 +237,7 @@ public class Test2 {
         temp5.put(temp1, temp3);
 
         table_schema.put(name, colDef);
+        System.out.println("name"+ name);
         table_col_index.put(name, temp4);
         table_col.put(name, temp1);
         table_col_datatype.put(name, temp5);
@@ -242,12 +272,19 @@ public class Test2 {
                     if (list.contains(col.getColumnName())) {
                         tableName = entry.getValue();
                     }
+                    System.out.println("tableNameNN  "+tableName);
+                    System.out.println("tablesch = "+table_schema.toString()+"tablename: "+table_schema.get(tableName));
                     List<ColumnDefinition> cd = table_schema.get(tableName);
+                    
                     if (cd == null) {
+                       // System.out.println("alias = "+alias_withTableName.toString()+tableName);
                         tableName = alias_withTableName.get(table.getName());
+                        
+                      //  System.out.print("schema "+table_schema.toString());
                         cd = table_schema.get(tableName);
+                        //System.out.print("cd "+cd.toString());
                     }
-                    System.out.print(cd.toString());
+                  //  System.out.print(cd.toString());
                     for (ColumnDefinition c : cd) {
                         if (Objects.equals(c.getColumnName(), col.getColumnName())) {
                             
