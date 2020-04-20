@@ -5,6 +5,7 @@
  */
 package com.mainclass;
 
+import java.io.IOException;
 import net.sf.jsqlparser.statement.select.PlainSelect;
 import net.sf.jsqlparser.statement.select.SelectBody;
 
@@ -19,7 +20,9 @@ public class SSelectBody extends AbsClass
     {
         if(selectB instanceof PlainSelect)
         {
-            //result = new SPlainSelect(selectB, table);
+            try{
+                result = new SPlainSelect(selectB, table);
+            }catch(IOException e){}
         }
     }
     
@@ -34,12 +37,12 @@ public class SSelectBody extends AbsClass
     @Override
     public void clear()
     {
-        
+        result.clear();
     }
     
     @Override
     public TableSpecifics get()
     {
-        return new TableSpecifics();
+        return result.get();
     }
 }

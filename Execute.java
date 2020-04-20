@@ -64,7 +64,7 @@ public class Execute
         CHAR, VARCHAR, STRING, DATE, DOUBLE, INT, NUMBER
     }
 
-    public static void main(String[] args) throws Exception 
+    /*public static void main(String[] args) throws Exception 
     {
         //List<String> tableData = new ArrayList<>(); //we get schema from create table. not csv header.
         queryPath = "K:\\test.txt";//args[0];
@@ -77,7 +77,7 @@ public class Execute
 
         //for(int i=0; i<queries.length; i++)
         //  System.out.println(queries[i]);
-    }
+    }*/
 
     static String[] breakBySemiColon(String data) 
     {

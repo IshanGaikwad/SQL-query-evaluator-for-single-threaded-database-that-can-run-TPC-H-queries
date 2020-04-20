@@ -30,10 +30,11 @@ public class DBMain
     {
         String queryFilePath = "K:\\test.txt"; //add path
         Tabless table1 = new Tabless();
-        table1.tablePath = "tablepath"; //add path
+        table1.tablePath = "K:\\R.dat"; //add path
+        //System.out.print(queryFilePath);
         String queries[] = readQueries(queryFilePath);
-        /*for(int i=0; i<queries.length; i++)
-            System.out.println(queries[i]);*/ //for testing query reading.
+        for(int i=0; i<queries.length; i++)
+            System.out.println(queries[i]); //for testing query reading.
             
         for(String query: queries) //extract one query at a time and run following code on each query.
         {

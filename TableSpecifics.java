@@ -20,7 +20,7 @@ import net.sf.jsqlparser.statement.create.table.ColumnDefinition;
 public class TableSpecifics //tableDetails.
 {
     List<String> columnList = new ArrayList<>();
-    List<String[]> rowResult = new ArrayList<>();
+    List<String[]> rowResult = new ArrayList<>();// yes.
     List<Table> tableList = new ArrayList<>();
     
     Map<String, ColumnDefinition> colDef = new LinkedHashMap<>();
@@ -28,4 +28,9 @@ public class TableSpecifics //tableDetails.
     Map<Column, Integer> colAliasTable = new LinkedHashMap<>();
     
     //Object clone()
+    @Override
+    public Object clone()throws CloneNotSupportedException
+    {
+        return super.clone();
+    }
 }

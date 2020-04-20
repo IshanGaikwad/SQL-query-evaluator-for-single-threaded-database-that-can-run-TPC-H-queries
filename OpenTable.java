@@ -7,6 +7,8 @@ package com.mainclass;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.schema.Table;
@@ -15,7 +17,7 @@ import net.sf.jsqlparser.statement.select.FromItem;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
 
-public class OpenTable 
+public class OpenTable extends AbsClass
 {
     File file;
     TableSpecifics tf;
@@ -51,5 +53,38 @@ public class OpenTable
                 tf.colAliasTable.put(new Column(new Table(table1.getName()), entry.getValue().getColumnName()), pos);
             pos++;
         }
+    }
+    
+    @Override
+    public boolean isNext()
+    {
+        boolean var;
+        var = (!iterator.hasNext())?(false):(true);
+        return var;
+    }
+    @Override
+    public void clear()
+    {
+        try
+        {
+            iterator = FileUtils.lineIterator(file);
+            
+        }catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+    
+    @Override
+    public TableSpecifics get()
+    {
+        List<String []> row = new ArrayList<>();
+        String s = iterator.nextLine();
+        
+        row.add(s.split(","));
+        
+        tf.rowResult = row;
+        
+        return tf;
     }
 }

@@ -5,6 +5,7 @@
  */
 package com.mainclass;
 
+import java.io.IOException;
 import net.sf.jsqlparser.statement.select.FromItem;
 import net.sf.jsqlparser.statement.select.Join;
 import net.sf.jsqlparser.statement.select.PlainSelect;
@@ -18,7 +19,7 @@ public class SPlainSelect extends AbsClass
 {
     AbsClass result;
     
-    SPlainSelect(SelectBody selectB, Tabless table)
+    SPlainSelect(SelectBody selectB, Tabless table)throws IOException
     {
         PlainSelect plainS = (PlainSelect) selectB;
         FromItem fromI = plainS.getFromItem();
@@ -33,26 +34,28 @@ public class SPlainSelect extends AbsClass
             }
         }
         
- //       if(plainS.getWhere() != null)
-         //   result = new SWhere(result, table, plainS);
+        if(plainS.getWhere() != null)
+            result = new SWhere(result, table, plainS); 
         result = new SSelectItem(result, table, plainS);
     }
     
     @Override
     public boolean isNext()
     {
-        return true;
+         boolean var;
+        var = (!result.isNext())?(false):(true);
+        return var; //return true;
     }
     
     @Override
     public void clear()
     {
-        
+        result.clear();
     }
     
     @Override
     public TableSpecifics get()
     {
-        return new TableSpecifics();
+        return result.get();
     }
 }
