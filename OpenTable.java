@@ -21,7 +21,7 @@ public class OpenTable extends AbsClass
 {
     File file;
     TableSpecifics tf;
-    LineIterator iterator;// = null;
+    LineIterator iterator;
     
     OpenTable(FromItem fromI, Tabless table)throws IOException
     {
