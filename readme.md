@@ -10,8 +10,7 @@ SELECT: Performs filtering and other operations on the data. The result of these
 Parser
 An SQL parser parses a query into an intelligible string field. An open-source SQL parser was used in this project. Documentation and guidelines on how to use this parser is available at: https://doc.odin.cse.buffalo.edu/jsqlparser/
 
-Schema
-The data directory contains files named table name.csv where table name is the name used in a CREATE TABLE statement. The result of CREATE TABLE statements is not to create a new file, but simply to synchronize the given TCPH sql schema to an existing .csv file. Delimiters used in these files, (a) vertical-pipe ("|") as a field delimiter, and (b) newlines ("\n") as record delimiters.
+
 
 Execution
 Run this program using the following syntax:
